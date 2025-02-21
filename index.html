@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.svg" type="image/x-icon">
+    <title>Relatório Fotográfico BG</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Relatório Fotográfico BG</h1>
+        <div class="upload-section">
+            <label for="fileUpload" class="upload-label">
+                <i class="fas fa-upload"></i> Escolher Imagens
+            </label>
+            <input type="file" id="fileUpload" multiple accept="image/*">
+        </div>
+        <div class="date-input">
+            <label for="dateInput">Data do Relatório:</label>
+            <input type="date" id="dateInput">
+            <button class="btn btn-secondary" onclick="setReportDate()">
+                <i class="fas fa-calendar"></i> Definir Data
+            </button>
+        </div>
+        <div class="actions-section">
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="exportToPDF()">
+                    <i class="fas fa-file-pdf"></i> Exportar Relatório
+                </button>
+                <button class="btn btn-danger" onclick="clearImages()">
+                    <i class="fas fa-trash"></i> Limpar Imagens
+                </button>
+            </div>
+            <div class="periodo-buttons">
+                <button onclick="setPeriodo('MANHÃ')" class="active">Período da Manhã</button>
+                <button onclick="setPeriodo('TARDE')">Período da Tarde</button>
+            </div>
+        </div>
+        <div class="image-container" id="imageContainer"></div>
+    </div>
+
+    <!-- Overlay de carregamento -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Gerando PDF...</p>
+        <div class="progress-bar">
+            <div id="progress" class="progress"></div>
+        </div>
+    </div>
+
+    <!-- Modal para tela cheia -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modalImage" class="modal-content">
+        <div id="caption"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
